@@ -1,0 +1,20 @@
+.tox {
+    --tox-toolbar-background-color: #316E9D !important;
+    --tox-button-color: white !important;
+  }
+  
+  .tox .tox-toolbar {
+    background-color: var(--tox-toolbar-background-color) !important;
+  }
+  
+  .tox .tox-tbtn {
+    color: var(--tox-button-color) !important;
+  }
+  
+  .tox .tox-tbtn svg {
+    fill: var(--tox-button-color) !important;
+  }
+  .tox .tox-tbtn--enabled {
+    background-color: aqua !important;
+  }
+  

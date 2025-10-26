@@ -1,0 +1,30 @@
+body {
+    background-color: #ededed !important;
+    font-family: Arial, sans-serif;
+  }
+  
+  .tox-toolbar {
+    background-color: #316E9D !important;
+    border-radius: 8px 8px 0 0 !important;
+  }
+  
+  .tox-toolbar__primary {
+    background-color: transparent !important;
+  }
+  
+  .tox-tbtn {
+    color: white !important;
+  }
+  
+  .tox-tbtn svg {
+    fill: white !important;
+  }
+  
+  .tox-toolbar-overlord {
+    border-radius: 8px 8px 0 0 !important;
+  }
+  
+  .tox-editor-container {
+    border-radius: 0 0 8px 8px !important;
+  }
+  

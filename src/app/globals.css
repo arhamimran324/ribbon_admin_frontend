@@ -1,0 +1,552 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* In index.css or global CSS file */
+
+* {
+  /*Scrollbar for Mozilla*/
+  scrollbar-width: none; /* Hide scrollbar */
+  scrollbar-color: transparent transparent;
+
+  /*For mozilla*/
+  -ms-overflow-style: none;
+}
+
+/*Root*/
+:root {
+  /* Font-Sizes for Laptop */
+  --h1: 3.125rem; /*50px*/
+  --h2: 2.625rem; /*42px*/
+  --h3: 2rem; /*32px*/
+  --h4: 1.5rem; /*24px*/
+  --h5: 1.25rem; /*20px*/
+  --h6: 1rem; /*16px*/
+  --xl: 1.25rem; /*20px*/
+  --lg: 1rem; /*16px*/
+  --md: 0.875rem; /*14px*/
+  --sm: 0.75rem; /*12px*/
+
+  /*Colors*/
+  --primary-color: #D0B38B;
+  --primary-color-blue: #774909;
+  --primary-gradient: linear-gradient(122deg, #D5A581 -26.29%, #efc78e 118.11%);
+  --primary-text: #D5A581;
+  
+  --secondary-text-gray: #969696;
+  --light-green: #e8d8c2;
+  --light-red: #fa999989;
+  --light-gray: #A6A6A6;
+  --light-paid: #baf2c886;
+  --light-pending: #84b8f368;
+  /*Colors Shades*/
+  --primary-light: #774909;
+  /* MaxWidth for container */
+  --max-super-container-width: 5840px;
+}
+
+.animated-button {
+  color: var(--white);
+  background: linear-gradient(99deg, #9d6b24 30%, #deb985 70%, #e5bc83 100%);
+  background-size: 150%;
+  transition:
+    background-position 0.8s ease-in-out,
+    background-size 0.8s ease-in-out;
+  /* border: 1px solid transparent; */
+}
+
+/* Apply the animated gradient effect only on hover */
+.animated-button:hover {
+  background-size: 200%;
+  background-position: right center;
+}
+
+/* Keep disabled button without the effect */
+.animated-button:disabled {
+  background: var(--light-gray) !important;
+  cursor: not-allowed;
+  color: var(--secondary-text-gray);
+}
+
+/* Hide scrollbar for Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  display: none;
+}
+* {
+  scrollbar-width: none; /* For Firefox */
+}
+* {
+  -ms-overflow-style: none; /* IE and older Edge */
+}
+.super-container {
+  max-width: 100%;
+  width: 100%;
+  margin: 0px auto;
+  box-sizing: border-box;
+}
+body {
+  background-color: #fafbfa;
+  height: -webkit-fill-availible;
+}
+.rmdp-header {
+  display: flex;
+  justify-content: center;
+  padding: 0 0 !important;
+  margin-top: 0 !important;
+  align-items: baseline !important;
+}
+.rmdp-arrow {
+  border: solid var(--gray) !important;
+  border-width: 0px 2px 2px 0px !important;
+}
+.rmdp-header-values {
+  color: var(--gray) !important;
+  font-size: var(--md);
+}
+
+.rmdp-calendar {
+  width: 366px;
+}
+.rmdp-calendar > div {
+  width: 100%;
+}
+
+.rmdp-day-picker {
+  display: block !important;
+  width: 100%;
+}
+
+.rmdp-calendar > div {
+  width: 100%;
+}
+.only.rmdp-month-picker,
+.only.rmdp-year-picker {
+  width: 100% !important;
+}
+.rmdp-calendar {
+  box-shadow: none !important;
+}
+.rmdp-calendar > div {
+  box-shadow: none !important;
+}
+
+.rmdp-week-day {
+  color: #000 !important;
+}
+.rmdp-range {
+  background: #d6e2eb !important;
+  box-shadow: none !important;
+  color: #000000 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  height: 34px !important;
+}
+.rmdp-week,
+.rmdp-ym {
+  justify-content: stretch !important;
+}
+.rmdp-day,
+.rmdp-week-day {
+  width: 70% !important;
+  height: 34px !important;
+}
+.rmdp-day.rmdp-today span {
+  width: 70% !important;
+  height: 100% !important;
+  background-color: #1a5f44 !important;
+}
+.rmdp-day span {
+  bottom: 0 I !important;
+  top: 0 !important;
+  height: 34px !important;
+  width: 70% !important;
+}
+.rmdp-range-hover.start.end:not(.force),
+.rmdp-range.start.end:not(.force) {
+  background: transparent !important;
+}
+.rmdp-range-hover.start.end:not(.force),
+.rmdp-range.start.end:not(.force) span {
+  background: #d6e2eb !important;
+}
+.rmdp-range-hover.start.end:not(.force):hover,
+.rmdp-range.start.end:not(.force):hover span {
+  background: #7ea6f0 !important;
+}
+
+.rmdp-day.rmdp-selected span:not(.highlight) {
+  background-color: #1a5f44 !important;
+  width: 70% !important;
+}
+
+.rmdp-arrow-container {
+  height: 17px !important;
+  display: flex !important;
+}
+.css-1dimb5e-singleValue{
+  color:#969696 !important;
+}
+
+#chart {
+  height: 256px !important;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+.css-hlgwow {
+  padding: 0px 8px !important;
+}
+.css-13cymwt-control {
+  background-color: transparent !important;
+}
+
+@media (hover: hover) {
+  .rmdp-day:not(.rmdp-disabled, .rmdp-day-hidden) span:hover {
+    height: 100% !important;
+    background: #7ea6f0 !important;
+    width: 70% !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .rmdp-calendar {
+    width: 250px;
+  }
+  .rmdp-day.rmdp-today span {
+    width: 100% !important;
+    z-index: 10;
+  }
+  .rmdp-day.rmdp-selected span:not(.highlight) {
+    width: 92% !important;
+  }
+  .rmdp-day:not(.rmdp-disabled, .rmdp-day-hidden) span:hover {
+    height: 100% !important;
+    background: #7ea6f0 !important;
+    width: 100% !important;
+  }
+}
+@media (max-width: 480px) {
+  .user-col {
+    flex-direction: column;
+  }
+  .add-user-button {
+    top: 106px;
+  }
+}
+@media (max-width: 366px) and (min-width: 310px) {
+  .recaptcha-container > div > div > div > div {
+    position: absolute;
+    left: -30px;
+  }
+  .recaptcha-container iframe {
+    transform: scaleX(0.8) !important;
+  }
+}
+@media (max-width: 639px) and (min-width: 321px) {
+  .rmdp-calendar {
+    width: 250px;
+  }
+  .rmdp-day.rmdp-today span {
+    width: 100% !important;
+    z-index: 10;
+  }
+  .rmdp-day.rmdp-selected span:not(.highlight) {
+    width: 92% !important;
+  }
+  .rmdp-day:not(.rmdp-disabled, .rmdp-day-hidden) span:hover {
+    height: 100% !important;
+    background: #7ea6f0 !important;
+    width: 92% !important;
+  }
+}
+
+/* Chart 1 */
+
+.area-chart {
+  height: 100% !important;
+  max-height: 280px !important;
+}
+
+.react-player {
+  border-radius: 10px;
+}
+
+/* Font-Sizes for Mobile */
+@media screen and (max-width: 767px) {
+  :root {
+    --h1: 2.375rem; /*38px*/
+    --h2: 2rem; /*42px*/
+    --h3: 1.625rem; /*32px*/
+    --h4: 1.375rem; /*24px*/
+    --h5: 1.25rem; /*20px*/
+    --h6: 1rem; /*16px*/
+    --xl: 1.25rem; /*20px*/
+    --lg: 0.875rem; /*16px*/
+    --md: 0.875rem; /*14px*/
+    --sm: 0.75rem; /*12px*/
+  }
+}
+/* Hide arrows in Chrome, Safari, Edge, and Opera */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide arrows in Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+/*Root*/
+:root {
+  /* Font-Sizes for Laptop */
+  --h1: 3.125rem; /*50px*/
+  --h2: 2.625rem; /*42px*/
+  --h3: 2rem; /*32px*/
+  --h4: 1.5rem; /*24px*/
+  --h5: 1.25rem; /*20px*/
+  --h6: 1rem; /*16px*/
+  --xl: 1.25rem; /*20px*/
+  --lg: 1rem; /*16px*/
+  --md: 0.875rem; /*14px*/
+  --sm: 0.75rem; /*12px*/
+
+  /*Colors*/
+
+  --white: #ffffff;
+  --black: #000000;
+}
+/* Font-Sizes for Mobile */
+@media screen and (max-width: 767px) {
+  :root {
+    --h1: 2.375rem; /*38px*/
+    --h2: 2rem; /*42px*/
+    --h3: 1.625rem; /*32px*/
+    --h4: 1.375rem; /*24px*/
+    --h5: 1.25rem; /*20px*/
+    --h6: 1rem; /*16px*/
+    --xl: 1.25rem; /*20px*/
+    --lg: 0.875rem; /*16px*/
+    --md: 0.875rem; /*14px*/
+    --sm: 0.75rem; /*12px*/
+  }
+}
+
+.custom-calendar {
+  width: 350px !important; /* Forcefully override any conflicting styles */
+  max-width: none !important; /* Remove max-width constraints */
+}
+
+/*Scrollbars*/
+
+/* For WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 0px; /* Remove scrollbar width */
+  height: 0px; /* Remove horizontal scrollbar */
+  background-color: transparent; /* Make background transparent */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Make the scrollbar thumb transparent */
+}
+
+/* Hide arrows in all browsers */
+input[type='number'] {
+  -webkit-appearance: textfield; /* Chrome, Safari, newer versions of Edge */
+  -moz-appearance: textfield; /* Firefox */
+  appearance: textfield;
+}
+
+/* Additional styling to hide spin buttons */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Change text in autofill textbox
+input:-webkit-autofill ~ .autofill-icon {
+  color: black !important;
+} */
+
+/* Horizontal Scrollbar Styling */
+.data-table-scrollable {
+  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-y: hidden; /* Prevent vertical scrollbar */
+}
+
+.data-table-scrollable::-webkit-scrollbar {
+  height: 8px; /* Set height for horizontal scrollbar */
+}
+.data-table-scrollable::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color); /* Thumb color */
+  border-radius: 4px; /* Rounded scrollbar */
+}
+
+.data-table-scrollable::-webkit-scrollbar-track {
+  background-color: var(--light-gray); /* Track color */
+  border-radius: 4px; /* Rounded track */
+}
+
+.data-table-scrollable {
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: var(--primary-color) var(--light-gray);
+} /* Thumb and track colors */
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    /* @apply border-border; */
+  }
+  body {
+    /* @apply bg-background text-foreground;
+    height: -webkit-fill-availible; */
+  }
+}
+
+/* Custom Scrollbar Styling for consistent appearance */
+.custom-scrollbar {
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #1a5f44 #f1f1f1; /* Thumb and Track colors */
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Track color */
+  border-radius: 10px; /* Rounded track */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #1a5f44; /* Thumb color */
+  border-radius: 10px; /* Rounded thumb */
+  border: 2px solid transparent; /* Smooth thumb padding */
+  background-clip: padding-box; /* Smoothness */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #25597a; /* Darker thumb color on hover */
+}
+
+/* Prevent auto-hiding of the scrollbar */
+.custom-scrollbar {
+  -ms-overflow-style: scrollbar; /* For IE and Edge */
+  overflow-y: scroll;
+}
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.custom-shadow {
+  box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.06);
+}
+
+.sub-menu {
+  overflow: hidden;
+  transition: 200ms;
+}
+
+.jvectormap-zoomin,
+.jvectormap-zoomout {
+  display: none;
+}
+
+.apexcharts-tooltip {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.tox-editor-header {
+  background-color: #25597a !important;
+}
+.tox-editor-header > * {
+  background-color: #25597a !important;
+}
+.tox .tox-toolbar-overlord .tox-toolbar:not(.tox-toolbar--scrolling):first-child,
+.tox .tox-toolbar-overlord .tox-toolbar__primary {
+  background-color: #25597a !important;
+  border: 1px solid #25597a !important;
+}
+.tox .tox-tbtn {
+  background-color: #25597a !important;
+}
+.tox .tox-tbtn svg {
+  fill: #ffff !important;
+}
+
+.tox-edit-area::before {
+  border: none !important;
+}
+.tox-tinymce {
+  max-height: 200px !important;
+}
+.tox .tox-statusbar {
+  display: none !important;
+}
+.tox .tox-tbtn--enabled {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+.tox .tox-toolbar__group {
+  gap: 10px !important;
+}
