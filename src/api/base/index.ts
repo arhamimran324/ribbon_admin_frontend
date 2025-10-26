@@ -5,7 +5,7 @@ import { store } from "@/redux/store";
 
 // REST API Client (Default)
 const restApiClient = axios.create({
-  baseURL: 'https://ribbon-backend.vercel.app',
+  baseURL: 'https://ribbon-backend.vercel.app/api',
 });
 restApiClient.interceptors.request.use((config) => {
   const token = store.getState()?.auth?.user?.token;
