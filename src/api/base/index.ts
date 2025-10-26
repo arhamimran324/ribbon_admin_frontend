@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 import { ApiConfig } from "../api-types";
 import { store } from "@/redux/store";
 
-// REST API Client (Default)
 const restApiClient = axios.create({
   baseURL: 'https://ribbon-backend.vercel.app/api',
 });
@@ -14,7 +13,6 @@ restApiClient.interceptors.request.use((config) => {
   }
   return config;
 });
-// AI API Client
 const xeroApiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_XERO_API_BASE_URL,
 });
