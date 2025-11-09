@@ -89,7 +89,7 @@ const DonutChart: React.FC<DonutChartProps> = ({
         }
         return `<div class="apexcharts-tooltip-box" style="background: ${item.color}; color: white; padding: 8px; border-radius: 4px;">
           <div style="font-weight: bold;">${item.name}</div>
-          <div>$${series[seriesIndex]}</div>
+          <div>£${series[seriesIndex]}</div>
         </div>`;
       },
       style: {
@@ -124,7 +124,7 @@ const DonutChart: React.FC<DonutChartProps> = ({
               color: "#969696",
               fontSize: "14px",
               fontWeight: "semi-bold",
-              formatter: () => `$${totalData}`,
+              formatter: () => `£${totalData}`,
             },
           },
         },

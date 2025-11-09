@@ -18,7 +18,7 @@ const CreditAndWalletTab = () => {
                 Total Amount in Dollars
               </Typography>
               <Typography size="h4" className=" font-bold text-blue">
-                $460
+                £460
               </Typography>
             </div>
           </div>

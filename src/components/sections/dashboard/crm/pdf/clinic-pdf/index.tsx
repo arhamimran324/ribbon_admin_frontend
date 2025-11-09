@@ -271,7 +271,7 @@ const ClinicPdf = ({ data }: any) => {
                   paddingHorizontal: 16,
                 }}
               >
-                ${item.price}
+                £{item.price}
               </Text>
             </View>
           ))}
@@ -288,7 +288,7 @@ const ClinicPdf = ({ data }: any) => {
             }}
           >
             <Text style={{ fontWeight: "extrabold" }}>Sub Total</Text>
-            <Text style={{ fontWeight: "extrabold" }}>${totals.sub_total}</Text>
+            <Text style={{ fontWeight: "extrabold" }}>£{totals.sub_total}</Text>
           </View>
           <View
             style={{
@@ -302,7 +302,7 @@ const ClinicPdf = ({ data }: any) => {
               Tax: Vat ({totals.tax.vat_rate}%)
             </Text>
             <Text style={{ fontWeight: "extrabold" }}>
-              ${totals.tax.vat_amount}
+              £{totals.tax.vat_amount}
             </Text>
           </View>
           <View
@@ -314,7 +314,7 @@ const ClinicPdf = ({ data }: any) => {
             }}
           >
             <Text style={{ fontWeight: "extrabold" }}>Discount</Text>
-            <Text style={{ fontWeight: "extrabold" }}>${totals.discount}</Text>
+            <Text style={{ fontWeight: "extrabold" }}>£{totals.discount}</Text>
           </View>
           <View
             style={{
@@ -329,7 +329,7 @@ const ClinicPdf = ({ data }: any) => {
           >
             <Text style={{ fontWeight: "extrabold" }}>Grand Total:</Text>
             <Text style={{ fontWeight: "extrabold" }}>
-              ${totals.grand_total}
+              £{totals.grand_total}
             </Text>
           </View>
         </View>

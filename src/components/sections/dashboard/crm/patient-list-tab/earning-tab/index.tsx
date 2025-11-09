@@ -39,7 +39,7 @@ const EarningTab: React.FC = () => {
 
   const paginatedData = filteredData.slice(
     (currentPage - 1) * rowsPerPage,
-    currentPage * rowsPerPage,
+    currentPage * rowsPerPage
   );
 
   return (
@@ -105,7 +105,7 @@ const EarningTab: React.FC = () => {
                     size="md"
                     className="text-[#098B0D] text-center !py-2 px-4 bg-[#D9F6DA] font-normal rounded-md"
                   >
-                    + ${earnings}
+                    + £{earnings}
                   </Typography>
                 </div>
               </td>

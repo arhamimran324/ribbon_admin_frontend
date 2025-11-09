@@ -34,7 +34,7 @@ const AddUser = () => {
               <>
                 <div
                   onClick={() => formik.values.users.length < 4 && push({ email: '', role: '' })}
-                  className={`flex justify-end ${formik.values.users.length === 4 ? 'opacity-80 cursor-not-allowed' : 'cursor-pointer'}`}
+                  className={`flex justify-end {formik.values.users.length === 4 ? 'opacity-80 cursor-not-allowed' : 'cursor-pointer'}`}
                 >
                   <Image src="/assets/svg/add-user-icon.svg" alt="add user icon missing" width={24} height={24} />
                 </div>
@@ -43,9 +43,9 @@ const AddUser = () => {
                   <div key={index} className="pb-5 flex user-col flex-row justify-between gap-5 relative">
                     <div className="w-full sm:w-[60%]">
                       <InputTextField
-                        label={`${addUserFrom.formFields.adduser.label} ${index + 1}`}
+                        label={`{addUserFrom.formFields.adduser.label} {index + 1}`}
                         placeholder={addUserFrom.formFields.adduser.placeholder}
-                        name={`users.${index}.email`}
+                        name={`users.{index}.email`}
                         type="email"
                         value={formik.values.users[index].email}
                         onChange={formik.handleChange}
@@ -63,12 +63,12 @@ const AddUser = () => {
                       <InputDropdown
                         label={addUserFrom.formFields.role.label}
                         placeholder={addUserFrom.formFields.role.placeholder}
-                        name={`users.${index}.role`}
+                        name={`users.{index}.role`}
                         options={options}
                         value={formik.values.users[index].role}
                         textColor="text-primary-text !m-0 h-[3.8rem]"
                         className="border border-light-gray rounded-xl"
-                        onSelect={(selected) => formik.setFieldValue(`users.${index}.role`, selected)}
+                        onSelect={(selected) => formik.setFieldValue(`users.{index}.role`, selected)}
                         onBlur={formik.handleBlur}
                         error={
                           formik.touched.users?.[index]?.role &&

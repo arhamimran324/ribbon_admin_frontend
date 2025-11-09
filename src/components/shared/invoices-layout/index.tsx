@@ -218,22 +218,22 @@ const InvoicesLayout: React.FC<InvoicesLayoutProps> = ({
             <div className="flex flex-col gap-2">
               <div className="flex justify-between items-center">
                 <Typography size="sm">Sub Total:</Typography>
-                <span> ${totals.subTotal}</span>
+                <span> £{totals.subTotal}</span>
               </div>
               <div className="flex justify-between items-center">
-                <Typography size="sm">Tax: Vat (15%):</Typography>
-                <span> ${totals.tax}</span>
+                <Typography size="sm">Tax: Vat (0%):</Typography>
+                <span> £{totals.tax}</span>
               </div>
               <div className="flex justify-between items-center">
                 <Typography size="sm">Discount:</Typography>
-                <span> ${totals.discount}</span>
+                <span> £{totals.discount}</span>
               </div>
             </div>
             <div className="w-full flex justify-between items-center bg-gradient-blue text-white px-6 py-4">
               <Typography size="lg" className="font-bold">
                 Grand Total:
               </Typography>
-              <span className="">${totals.grandTotal}</span>
+              <span className="">£{totals.grandTotal}</span>
             </div>
           </div>
         )}

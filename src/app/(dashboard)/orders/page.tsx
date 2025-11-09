@@ -70,7 +70,7 @@ const Orders = () => {
                 ? `${order.shippingAddress.firstName} ${order.shippingAddress.lastName}`
                 : order.shippingAddress?.email || "Guest Customer",
           date: new Date(order.createdAt).toLocaleDateString(),
-          totalAmount: `$${order.total.toFixed(2)}`,
+          totalAmount: `£${order.total.toFixed(2)}`,
           paymentMethod:
             order.paymentInfo?.paymentMethod === "paypal" ? "PayPal" : "Card",
           paymentStatus: order.paymentInfo?.paymentStatus || "pending",

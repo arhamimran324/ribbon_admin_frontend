@@ -8,12 +8,6 @@ import { getOrderById } from "@/api/service/dashboard";
 import Loading from "@/app/loading";
 
 interface OrderItem {
-  personalization: {
-    to: string;
-    from: string;
-    message: string;
-    personalized: boolean;
-  };
   product: {
     _id: string;
     productName: string;
@@ -27,12 +21,37 @@ interface OrderItem {
     updatedAt: string;
     __v: number;
   };
-  productName: string;
-  price: number;
   quantity: number;
-  boxType: string;
-  noteCard: string;
+  customization?: {
+    boxType: string;
+    noteCard: string;
+    personalization: {
+      to: string;
+      from: string;
+      message: string;
+      personalized: boolean;
+    };
+  };
   _id: string;
+}
+
+interface BuiltBox {
+  boxType: string;
+  boxSize: string;
+  boxLimit: number;
+  cardDetails: {
+    cardId: string;
+    cardName: string;
+    to: string;
+    from: string;
+    message: string;
+    leaveBlank: boolean;
+    noNote: boolean;
+  };
+  personalization: {
+    option: string;
+    message: string;
+  };
 }
 
 interface Order {
@@ -43,8 +62,21 @@ interface Order {
     email: string;
     phone: string;
   };
+  orderType: "simple" | "built-box";
   items: OrderItem[];
-  shippingAddress: string;
+  builtBox?: BuiltBox;
+  shippingAddress:
+    | string
+    | {
+        firstName: string;
+        lastName: string;
+        email: string;
+        phone: string;
+        address: string;
+        city: string;
+        zipCode: string;
+        country: string;
+      };
   orderStatus: string;
   subtotal: number;
   tax: number;
@@ -85,11 +117,14 @@ const OrderDetailsPage = () => {
 
   const getStatusColor = (status: string) => {
     const statusColors: { [key: string]: string } = {
+      pending: "bg-yellow-100 text-yellow-800",
       confirmed: "bg-blue-100 text-blue-800",
-      paid: "bg-green-100 text-green-800",
-      shipped: "bg-purple-100 text-purple-800",
+      processing: "bg-purple-100 text-purple-800",
+      shipped: "bg-indigo-100 text-indigo-800",
       delivered: "bg-green-100 text-green-800",
       cancelled: "bg-red-100 text-red-800",
+      paid: "bg-green-100 text-green-800",
+      failed: "bg-red-100 text-red-800",
     };
     return statusColors[status] || "bg-gray-100 text-gray-800";
   };
@@ -104,15 +139,53 @@ const OrderDetailsPage = () => {
     });
   };
 
+  // Format shipping address for display
+  const formatShippingAddress = (address: Order["shippingAddress"]) => {
+    if (typeof address === "string") {
+      return address;
+    }
+
+    return `
+      ${address.firstName} ${address.lastName}
+      ${address.address}
+      ${address.city}, ${address.zipCode}
+      ${address.country}
+      ${address.email}
+      ${address.phone}
+    `
+      .trim()
+      .replace(/\n\s+/g, "\n");
+  };
+
   // Check if an item has personalization data
   const hasPersonalization = (item: OrderItem) => {
     return (
-      item.personalization &&
-      (item.personalization.personalized ||
-        item.personalization.to ||
-        item.personalization.from ||
-        item.personalization.message)
+      item.customization?.personalization &&
+      (item.customization.personalization.personalized ||
+        item.customization.personalization.to ||
+        item.customization.personalization.from ||
+        item.customization.personalization.message)
     );
+  };
+
+  // Get product name for display
+  const getProductName = (item: OrderItem) => {
+    return item.product?.productName || "Product";
+  };
+
+  // Get product price for display
+  const getProductPrice = (item: OrderItem) => {
+    return item.product?.price || 0;
+  };
+
+  // Get product image for display
+  const getProductImage = (item: OrderItem) => {
+    return item.product?.image;
+  };
+
+  // Get product category for display
+  const getProductCategory = (item: OrderItem) => {
+    return item.product?.category || "Uncategorized";
   };
 
   if (loading) {
@@ -153,6 +226,11 @@ const OrderDetailsPage = () => {
           <Typography size="h3" className="font-bold flex gap-2">
             Order Details -{" "}
             <span className="text-primary-text">{order.orderNumber}</span>
+            {order.orderType === "built-box" && (
+              <span className="px-2 py-1 bg-purple-100 text-purple-800 text-sm rounded-full font-normal">
+                Built Box
+              </span>
+            )}
           </Typography>
         </div>
         <div className="flex items-center gap-4">
@@ -230,8 +308,8 @@ const OrderDetailsPage = () => {
               <Typography size="sm" className="text-gray-600">
                 Address
               </Typography>
-              <Typography className="font-medium">
-                {order.shippingAddress}
+              <Typography className="font-medium whitespace-pre-line">
+                {formatShippingAddress(order.shippingAddress)}
               </Typography>
             </div>
             <div>
@@ -279,18 +357,157 @@ const OrderDetailsPage = () => {
               <Typography size="sm" className="text-gray-600">
                 Payment ID
               </Typography>
-              <Typography size="sm" className="font-mono text-gray-700">
-                {order.paymentInfo.paymentId}
+              <Typography
+                size="sm"
+                className="font-mono text-gray-700 break-all"
+              >
+                {order.paymentInfo.paymentId || "-"}
               </Typography>
             </div>
           </div>
         </div>
       </div>
 
+      {/* Built Box Information */}
+      {order.orderType === "built-box" && order.builtBox && (
+        <div className="bg-purple-50 p-6 rounded-lg border border-purple-200">
+          <Typography size="h4" className="font-semibold mb-4 text-purple-800">
+            🎁 Built Box Details
+          </Typography>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div>
+              <Typography size="sm" className="text-purple-600 font-medium">
+                Box Type
+              </Typography>
+              <Typography className="font-semibold capitalize">
+                {order.builtBox.boxType}
+              </Typography>
+            </div>
+            <div>
+              <Typography size="sm" className="text-purple-600 font-medium">
+                Box Size
+              </Typography>
+              <Typography className="font-semibold">
+                {order.builtBox.boxSize}
+              </Typography>
+            </div>
+            <div>
+              <Typography size="sm" className="text-purple-600 font-medium">
+                Box Limit
+              </Typography>
+              <Typography className="font-semibold">
+                {order.builtBox.boxLimit} items
+              </Typography>
+            </div>
+            <div>
+              <Typography size="sm" className="text-purple-600 font-medium">
+                Items Selected
+              </Typography>
+              <Typography className="font-semibold">
+                {order.items.length} items
+              </Typography>
+            </div>
+          </div>
+
+          {/* Card Details */}
+          {order.builtBox.cardDetails && (
+            <div className="mt-6 p-4 bg-white rounded-lg border">
+              <Typography
+                size="h5"
+                className="font-semibold mb-3 text-purple-700"
+              >
+                📝 Card Details
+              </Typography>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <Typography size="sm" className="text-gray-600">
+                    Card Type
+                  </Typography>
+                  <Typography className="font-medium">
+                    {order.builtBox.cardDetails.cardName}
+                  </Typography>
+                </div>
+                {!order.builtBox.cardDetails.leaveBlank &&
+                  !order.builtBox.cardDetails.noNote && (
+                    <>
+                      {order.builtBox.cardDetails.to && (
+                        <div>
+                          <Typography size="sm" className="text-gray-600">
+                            To
+                          </Typography>
+                          <Typography className="font-medium">
+                            {order.builtBox.cardDetails.to}
+                          </Typography>
+                        </div>
+                      )}
+                      {order.builtBox.cardDetails.from && (
+                        <div>
+                          <Typography size="sm" className="text-gray-600">
+                            From
+                          </Typography>
+                          <Typography className="font-medium">
+                            {order.builtBox.cardDetails.from}
+                          </Typography>
+                        </div>
+                      )}
+                      {order.builtBox.cardDetails.message && (
+                        <div className="md:col-span-2">
+                          <Typography size="sm" className="text-gray-600">
+                            Message
+                          </Typography>
+                          <Typography className="font-medium italic">
+                            "{order.builtBox.cardDetails.message}"
+                          </Typography>
+                        </div>
+                      )}
+                    </>
+                  )}
+                {order.builtBox.cardDetails.leaveBlank && (
+                  <div className="md:col-span-2">
+                    <Typography className="text-blue-600 font-medium">
+                      📄 Card left blank for customer to fill
+                    </Typography>
+                  </div>
+                )}
+                {order.builtBox.cardDetails.noNote && (
+                  <div className="md:col-span-2">
+                    <Typography className="text-gray-600 font-medium">
+                      📭 No note or card requested
+                    </Typography>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Personalization */}
+          {order.builtBox.personalization &&
+            order.builtBox.personalization.option === "yes" && (
+              <div className="mt-4 p-4 bg-white rounded-lg border">
+                <Typography
+                  size="h5"
+                  className="font-semibold mb-3 text-purple-700"
+                >
+                  ✨ Personalization
+                </Typography>
+                <Typography className="font-medium">
+                  {order.builtBox.personalization.message ||
+                    "Personalized message included"}
+                </Typography>
+              </div>
+            )}
+        </div>
+      )}
+
       {/* Order Items */}
       <div className="bg-gray-50 p-6 rounded-lg">
         <Typography size="h4" className="font-semibold mb-4">
           Order Items ({order.items.length})
+          {order.orderType === "built-box" && (
+            <span className="text-sm font-normal text-gray-600 ml-2">
+              (Built Box Selection)
+            </span>
+          )}
         </Typography>
         <div className="space-y-4">
           {order.items.map((item, index) => (
@@ -300,10 +517,10 @@ const OrderDetailsPage = () => {
             >
               <div className="flex items-center gap-4 flex-1">
                 <div className="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center">
-                  {item.product.image ? (
+                  {getProductImage(item) ? (
                     <img
-                      src={item.product.image}
-                      alt={item.productName}
+                      src={getProductImage(item)}
+                      alt={getProductName(item)}
                       className="w-16 h-16 object-cover rounded-lg"
                     />
                   ) : (
@@ -318,27 +535,30 @@ const OrderDetailsPage = () => {
                   <div className="flex justify-between">
                     <div className="">
                       <Typography className="font-semibold">
-                        {item.productName}
+                        {getProductName(item)}
                       </Typography>
                       <Typography size="sm" className="text-gray-600">
-                        {item.product.category}
+                        {getProductCategory(item)}
                       </Typography>
                       <div className="flex gap-4 mt-1">
                         <Typography size="sm" className="text-gray-600">
                           Qty: {item.quantity}
                         </Typography>
-                        <Typography size="sm" className="text-gray-600">
-                          Box: {item.boxType}
-                        </Typography>
-                        {item.noteCard !== "None" && (
+                        {item.customization?.boxType && (
                           <Typography size="sm" className="text-gray-600">
-                            Note: {item.noteCard}
+                            Box: {item.customization.boxType}
                           </Typography>
                         )}
+                        {item.customization?.noteCard &&
+                          item.customization.noteCard !== "None" && (
+                            <Typography size="sm" className="text-gray-600">
+                              Note: {item.customization.noteCard}
+                            </Typography>
+                          )}
                       </div>
                     </div>
                     <Typography className="font-bold text-lg">
-                      ${(item.price * item.quantity).toFixed(2)}
+                      £{(getProductPrice(item) * item.quantity).toFixed(2)}
                     </Typography>
                   </div>
 
@@ -352,7 +572,7 @@ const OrderDetailsPage = () => {
                         🎁 Personalization Details
                       </Typography>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
-                        {item.personalization.from && (
+                        {item.customization?.personalization.from && (
                           <div>
                             <Typography
                               size="xs"
@@ -361,11 +581,11 @@ const OrderDetailsPage = () => {
                               From:
                             </Typography>
                             <Typography size="sm" className="text-blue-700">
-                              {item.personalization.from}
+                              {item.customization.personalization.from}
                             </Typography>
                           </div>
                         )}
-                        {item.personalization.to && (
+                        {item.customization?.personalization.to && (
                           <div>
                             <Typography
                               size="xs"
@@ -374,11 +594,11 @@ const OrderDetailsPage = () => {
                               To:
                             </Typography>
                             <Typography size="sm" className="text-blue-700">
-                              {item.personalization.to}
+                              {item.customization.personalization.to}
                             </Typography>
                           </div>
                         )}
-                        {item.personalization.message && (
+                        {item.customization?.personalization.message && (
                           <div className="md:col-span-2">
                             <Typography
                               size="xs"
@@ -390,7 +610,7 @@ const OrderDetailsPage = () => {
                               size="sm"
                               className="text-blue-700 italic"
                             >
-                              "{item.personalization.message}"
+                              "{item.customization.personalization.message}"
                             </Typography>
                           </div>
                         )}
@@ -412,21 +632,21 @@ const OrderDetailsPage = () => {
         <div className="max-w-xs ml-auto space-y-3">
           <div className="flex justify-between">
             <Typography className="text-gray-600">Subtotal</Typography>
-            <Typography>${order.subtotal.toFixed(2)}</Typography>
+            <Typography>£{order.subtotal.toFixed(2)}</Typography>
           </div>
           <div className="flex justify-between">
             <Typography className="text-gray-600">Tax</Typography>
-            <Typography>${order.tax.toFixed(2)}</Typography>
+            <Typography>£{order.tax.toFixed(2)}</Typography>
           </div>
           <div className="flex justify-between">
             <Typography className="text-gray-600">Shipping Fee</Typography>
-            <Typography>${order.shippingFee.toFixed(2)}</Typography>
+            <Typography>£{order.shippingFee.toFixed(2)}</Typography>
           </div>
           {order.discount > 0 && (
             <div className="flex justify-between">
               <Typography className="text-gray-600">Discount</Typography>
               <Typography className="text-green-600">
-                -${order.discount.toFixed(2)}
+                -£{order.discount.toFixed(2)}
               </Typography>
             </div>
           )}
@@ -434,7 +654,7 @@ const OrderDetailsPage = () => {
           <div className="flex justify-between">
             <Typography className="font-semibold">Total</Typography>
             <Typography className="font-bold text-lg">
-              ${order.total.toFixed(2)}
+              £{order.total.toFixed(2)}
             </Typography>
           </div>
         </div>
@@ -452,6 +672,14 @@ const OrderDetailsPage = () => {
             </Typography>
             <Typography size="sm" className="font-mono">
               {order._id}
+            </Typography>
+          </div>
+          <div>
+            <Typography size="sm" className="text-gray-600">
+              Order Type
+            </Typography>
+            <Typography size="sm" className="capitalize">
+              {order.orderType.replace("-", " ")}
             </Typography>
           </div>
           <div>

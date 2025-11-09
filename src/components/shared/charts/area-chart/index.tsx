@@ -74,11 +74,11 @@ const AreaChart: React.FC<AreaChartProps> = ({
         show: false,
         formatter: (value: number) => {
           if (value === 0) {
-            return `< ${showDollarSign ? `$${value}` : `${value}`}`;
+            return `< ${showDollarSign ? `£${value}` : `${value}`}`;
           } else if (value === maxValue) {
-            return `${showDollarSign ? `$${value}` : `${value}`} >`;
+            return `${showDollarSign ? `£${value}` : `${value}`} >`;
           }
-          return showDollarSign ? `$${value}` : `${value}`;
+          return showDollarSign ? `£${value}` : `${value}`;
         },
         style: {
           colors: "#A6A6A6",
@@ -128,7 +128,7 @@ const AreaChart: React.FC<AreaChartProps> = ({
        <div style="font-weight: normal;
        font-size: 10px;
        ">This Week</div>
-        <div style="font-weight: bold;">${showDollarSign ? `$${value}` : value}</div>
+        <div style="font-weight: bold;">${showDollarSign ? `£${value}` : value}</div>
         <div style="font-size: 12px;">${month}</div>
       </div>`;
       },

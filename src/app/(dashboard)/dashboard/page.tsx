@@ -194,7 +194,7 @@ const Home: NextPage = () => {
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
-      currency: "USD",
+      currency: "GBP",
     }).format(amount);
   };
 
@@ -320,7 +320,7 @@ const Home: NextPage = () => {
                   <p className="text-lg font-bold text-purple-700">
                     {allTimeStats
                       ? formatCurrency(allTimeStats.averageOrderValue)
-                      : "$0.00"}
+                      : "£0.00"}
                   </p>
                   <p className="text-xs text-purple-600 mt-1">
                     Across all successful orders

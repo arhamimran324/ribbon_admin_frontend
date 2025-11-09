@@ -48,7 +48,7 @@ const AllNotifications: React.FC = () => {
       const currentLength = visibleNotifications.length;
       const moreNotifications = filteredNotifications.slice(
         currentLength,
-        currentLength + 10,
+        currentLength + 10
       );
       setVisibleNotifications((prev) => [...prev, ...moreNotifications]);
       setLoading(false);
@@ -90,7 +90,7 @@ const AllNotifications: React.FC = () => {
               <button
                 key={filter}
                 onClick={() => setActiveTab(filter as "All" | "unread")}
-                className={`px-4 py-2 rounded-lg ${
+                className={`px-4 py-2 rounded-lg {
                   activeTab === filter
                     ? "border-primary-color border text-primary-color"
                     : "border-light-gray border text-light-green"
@@ -122,12 +122,12 @@ const AllNotifications: React.FC = () => {
             }: Notification) => (
               <tr
                 key={id}
-                className={`border-b ${unread ? "bg-light-green/40" : ""} hover:bg-white transition`}
+                className={`border-b {unread ? "bg-light-green/40" : ""} hover:bg-white transition`}
               >
                 <td className="px-4 lg:px-6 py-4 text-start break-words">
                   <div className="flex items-start gap-2">
                     <Iconify
-                      className={`text-primary-color relative top-[5px] ${unread ? "block" : "invisible"}`}
+                      className={`text-primary-color relative top-[5px] {unread ? "block" : "invisible"}`}
                       icon="prime:circle-fill"
                       width="10"
                       height="10"
@@ -135,7 +135,7 @@ const AllNotifications: React.FC = () => {
                     <div className="flex flex-col gap-1">
                       <Typography
                         size="md"
-                        className={`font-semibold ${unread ? "text-primary-color" : "text-primary-text"}`}
+                        className={`font-semibold {unread ? "text-primary-color" : "text-primary-text"}`}
                       >
                         {title}
                       </Typography>

@@ -138,7 +138,7 @@ const Payments = () => {
         month: "short",
         day: "numeric",
       }),
-      amount: `$${payment.amount.toFixed(2)}`,
+      amount: `£${payment.amount.toFixed(2)}`,
       method:
         payment.paymentMethod === "card"
           ? `Card${payment.cardBrand ? ` (${payment.cardBrand})` : ""}`
@@ -246,7 +246,7 @@ const Payments = () => {
                   Total
                 </Typography>
                 <Typography className="font-semibold">
-                  ${paymentsData.summary.totalAmount.toFixed(2)}
+                  £{paymentsData.summary.totalAmount.toFixed(2)}
                 </Typography>
               </div>
               <div className="text-center">
@@ -254,7 +254,7 @@ const Payments = () => {
                   Successful
                 </Typography>
                 <Typography className="font-semibold text-green">
-                  ${paymentsData.summary.successfulAmount.toFixed(2)}
+                  £{paymentsData.summary.successfulAmount.toFixed(2)}
                 </Typography>
               </div>
               <div className="text-center">
