@@ -1,6 +1,5 @@
 <div align="center"><strong>Next.js Starter Template</strong></div>
 <div align="center">Highly scalable foundation with the best DX. All the tools you need to build your next project.</div>
-
 <br />
 
 
