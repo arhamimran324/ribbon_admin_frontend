@@ -11,9 +11,9 @@
     "typescript"
   ],
   "scripts": {
-    "dev": "next dev -p 8005",
-    "build": "next build",
-    "start": "next start",
+    "dev": "node api.js && next dev -p 8005",
+    "build": "node api.js && next build",
+    "start": "node api.js && next start",
     "type-check": "tsc --noEmit",
     "lint": "eslint --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\"",
     "format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\" --write",

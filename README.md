@@ -1,72 +1,206 @@
-<div align="center"><strong>Next.js Starter Template</strong></div>
-<div align="center">Highly scalable foundation with the best DX. All the tools you need to build your next project.</div>
-<br />
+# Ribbon Admin Frontend
 
+A modern, scalable admin dashboard built with cutting-edge web technologies. This project provides a professional foundation for building enterprise-grade administrative interfaces with best-in-class developer experience.
+
+---
+
+## 📋 Table of Contents
+
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Available Scripts](#available-scripts)
+- [Configuration](#configuration)
+- [Development Workflow](#development-workflow)
+- [License](#license)
+
+---
+
+## ✨ Features
+
+### Core Technology Stack
+- **⚡ Next.js 14** — Utilizing the modern App Router for optimal performance and developer experience
+- **⚛️ React 18** — Latest React features for building interactive user interfaces
+- **⛑ TypeScript** — Full static typing for improved code quality and maintainability
+
+### Development Tools & Practices
+- **📏 ESLint** — Automated code quality and consistency analysis
+- **💖 Prettier** — Opinionated code formatter ensuring uniform style
+- **🐶 Husky** — Git hooks automation for pre-commit checks
+- **🚓 Commitlint** — Enforces conventional commit standards
+- **🖌 Renovate** — Automated dependency management and updates
+- **🚫 Lint-staged** — Performance-optimized pre-commit linting
+- **👷 CI/CD Workflow** — Type checking and linting on pull requests
+- **⚙️ EditorConfig** — Cross-IDE coding style standardization
+- **🗂 Path Mapping** — Clean, maintainable imports with `@` prefix
+
+---
+
+## 📦 Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- **Node.js** ≥ 20.x
+- **Yarn** ≥ 1.22.22
+
+---
+
+## 🚀 Getting Started
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/arhamimran324/ribbon_admin_frontend.git
+cd ribbon_admin_frontend
+```
+
+2. Install dependencies:
+```bash
+yarn install
+```
+
+3. Start the development server:
+```bash
+yarn dev
+```
+
+4. Open your browser and navigate to:
+```
+http://localhost:3000
+```
+
+---
+
+## 📁 Project Structure
+
+```
+ribbon_admin_frontend/
+├── .github/              # GitHub Actions CI/CD workflows
+├── .husky/               # Git hooks configuration
+├── public/               # Static assets (images, robots.txt, favicon)
+├── src/                  # Application source code
+│   ├── components/       # Reusable React components
+│   ├── pages/            # Application pages
+│   ├── styles/           # Global and component styles
+│   └── ...
+├── .eslintrc.json        # ESLint configuration
+├── .prettierrc            # Prettier configuration
+├── tsconfig.json         # TypeScript configuration
+├── next.config.js        # Next.js configuration
+└── package.json          # Project dependencies and scripts
+```
+
+---
+
+## 🛠 Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `yarn dev` | Start development server on `http://localhost:3000` |
+| `yarn build` | Create optimized production build |
+| `yarn start` | Run application in production mode |
+| `yarn type-check` | Validate code with TypeScript compiler |
+| `yarn lint` | Run ESLint on `src` directory |
+| `yarn format` | Format code with Prettier |
+
+---
+
+## ⚙️ Configuration
+
+### TypeScript Path Mapping
+
+The project uses TypeScript path aliases for cleaner, more maintainable imports. Use the `@` prefix to import from the project root:
+
+```typescript
+// Import components
+import { Button } from '@/components/Button';
+import { Layout } from '@/components/Layout';
+
+// Import utilities
+import { formatDate } from '@/utils/formatters';
+
+// Import from public folder
+import logoImage from '@/public/images/logo.png';
+```
+
+### Environment Variables
+
+Create a `.env.local` file in the project root for environment-specific configuration:
+
+```env
+NEXT_PUBLIC_API_URL=https://api.example.com
+API_SECRET_KEY=your_secret_key
+```
+
+---
+
+## 👥 Development Workflow
+
+### Commit Standards
+
+This project enforces [Conventional Commits](https://www.conventionalcommits.org/) format:
+
+```
+<type>(<scope>): <subject>
+
+<body>
+
+<footer>
+```
+
+**Common types:** `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
+
+Example:
+```
+feat(auth): implement JWT authentication
+fix(dashboard): resolve chart rendering issue
+docs: update API documentation
+```
+
+### Pre-commit Checks
+
+Husky automatically runs:
+- ESLint and Prettier checks on staged files
+- TypeScript type validation
+- Commit message validation
+
+---
+
+## 🧪 Technology Stack
+
+| Technology | Percentage | Purpose |
+|-----------|-----------|---------|
+| TypeScript | 95.8% | Type-safe JavaScript development |
+| CSS | 2.9% | Styling and layout |
+| JavaScript | 1.3% | Dynamic functionality |
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License — see the [LICENSE.md](LICENSE.md) file for full details.
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please ensure your code follows the project's standards:
+
+1. Follow Conventional Commits
+2. Maintain TypeScript best practices
+3. Pass all linting and type checks
+4. Add tests where applicable
+
+---
+
+## 📞 Support
+
+For issues, questions, or suggestions, please open an [issue](https://github.com/arhamimran324/ribbon_admin_frontend/issues) on GitHub.
+
+---
 
 <div align="center">
-  <sub>Created by Code Encoders with the help of wonderful contributors.</sub>
+  <sub>Built with ❤️ for modern web development</sub>
 </div>
-
-<br />
-
-## Features
-
-- ⚡️ Next.js 14 (App Router)
-- ⚛️ React 18
-- ⛑ TypeScript
-- 📏 ESLint — To find and fix problems in your code
-- 💖 Prettier — Code Formatter for consistent style
-- 🐶 Husky — For running scripts before committing
-- 🚓 Commitlint — To make sure your commit messages follow the convention
-- 🖌 Renovate — To keep your dependencies up to date
-- 🚫 lint-staged — Run ESLint and Prettier against staged Git files
-- 👷 PR Workflow — Run Type Check & Linters on Pull Requests
-- ⚙️ EditorConfig - Consistent coding styles across editors and IDEs
-- 🗂 Path Mapping — Import components or images using the `@` prefix
-
-### Development
-
-To start the project locally, run:
-
-```bash
-yarn run dev
-```
-
-Open `http://localhost:3000` with your browser to see the result.
-
-## Documentation
-
-### Requirements
-
-- Node.js >= 20
-- yarn >= 1.22.22 
-
-### Directory Structure
-
-- [`.github`](.github) — GitHub configuration including the CI workflow.<br>
-- [`.husky`](.husky) — Husky configuration and hooks.<br>
-- [`public`](./public) — Static assets such as robots.txt, images, and favicon.<br>
-- [`src`](./src) — Application source code, including pages, components, styles.
-
-### Scripts
-
-- `yarn dev` — Starts the application in development mode at `http://localhost:3000`.
-- `yarn build` — Creates an optimized production build of your application.
-- `yarn start` — Starts the application in production mode.
-- `yarn type-check` — Validate code using TypeScript compiler.
-- `yarn lint` — Runs ESLint for all files in the `src` directory.
-- `yarn format` — Runs Prettier for all files in the `src` directory.
-
-### Path Mapping
-
-TypeScript are pre-configured with custom path mappings. To import components or files, use the `@` prefix.
-
-```tsx
-import { Button } from '@/components/Button';
-// To import images or other files from the public folder
-import avatar from '@/public/avatar.png';
-```
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for more information.
